@@ -10,9 +10,9 @@ code {
 }
 
 .MuiToolbar-regular {
-    background-color: #8276f4;
+    background: linear-gradient(to bottom, #8276f4 50%, #af8eff 100%);
 }
 
-.menuI {
-    text-align: justify;
+h6.MuiTypography-root.makeStyles-title-3.MuiTypography-h6 {
+    color: #81E8F0;
 }
