@@ -58,10 +58,10 @@ const Menu = () => {
                             <Button color="inherit">contact us</Button>
                             <Button color="inherit">contact us</Button>
                             <IconButton>
-                                <ShoppingCartIcon/>
+                                <ShoppingCartIcon className="mysiconos"/>
                             </IconButton>
                             <IconButton>
-                                <AccountCircle/>  
+                                <AccountCircle className="mysiconos"/>  
                             </IconButton>  
                         </div>
                     </Toolbar>

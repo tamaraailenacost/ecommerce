@@ -9,6 +9,13 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+
+/* Mis estilos CSS-----------------------------------------------------------------------------------------*/
+
+.mysiconos {
+    color: #81e8f0;
+}
+
 .MuiToolbar-regular {
     background: linear-gradient(to bottom, #8276f4 50%, #af8eff 100%);
 }
