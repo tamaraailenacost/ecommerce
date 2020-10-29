@@ -9,8 +9,9 @@ import { Card,
         IconButton
     } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ItemCount from '../components/ItemCount';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 const Items = () => {
@@ -38,13 +39,18 @@ const Items = () => {
                     <Typography>
                         1500
                     </Typography>
-                <IconButton>
-                    <AddShoppingCartIcon size="small" color="primary"/>
-                </IconButton>
+                <ItemCount />
                 <IconButton >
                     <ShareIcon size="small" color="primary" />
                 </IconButton>
             </CardActions>
+            <Button
+                variant="contained"
+                size="large"
+                startIcon={<ShoppingBasketIcon />}
+            >
+                Buy
+            </Button>
             </Card> 
         </div>
     );

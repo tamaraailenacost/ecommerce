@@ -23,3 +23,9 @@ code {
 h6.MuiTypography-root.makeStyles-title-3.MuiTypography-h6 {
     color: #81E8F0;
 }
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge {
+    background-color: #8276f4;
+    margin: 1em;
+    color: #81E8F0;
+}
