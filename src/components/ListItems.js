@@ -1,43 +1,42 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import Items from '../components/Items';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
+
+
+//Promise resolve an objet with the items data
+const getItems = () => {
+    return new Promise((resp, rej) =>{
+        setTimeout( ()=> {
+            resp( [ 
+                { id: 1, title: "2x1 Loop class", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
+                { id: 2, title: "Rise the Bar", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
+                { id: 3, title: "Level Up with Loop", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
+                { id: 4, title: "contempo", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
+                ])
+           
+        }, 2000)
+    });
+}
+
+
 
 const ListItems = () => {
 
-    const classes = useStyles();
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        getItems( ).then(
+            resp => {
+                setList( resp );
+        });
+    
+    }, []);
     
     return (
         <div>
-             <Grid container item spacing={4} style={{ marginTop: "2em" }}>
-                 <Grid xs={0} sm={1} />
-                <Grid item xs={12} sm={3}>
-                    <Paper className={classes.paper} elevation={3} >
-                        <Items/>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    <Paper className={classes.paper} elevation={3} >
-                        <Items/>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    <Paper className={classes.paper} elevation={3} >
-                        <Items/>
-                    </Paper>
-                </Grid>
-                <Grid xs={0} sm={1}/>
+             <Grid container item spacing={4} style={{ marginTop: "2em" }}>                
+                <Items resp = { list }/>
             </Grid>    
         </div>
     );
