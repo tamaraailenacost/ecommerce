@@ -1,9 +1,12 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Card, 
         CardActionArea, 
         CardMedia, 
         Typography, 
         Button, 
+        Paper,
+        Grid,
         CardContent, 
         CardActions, 
         IconButton
@@ -14,19 +17,37 @@ import ItemCount from '../components/ItemCount';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
-const Items = () => {
-    return (
-        <div>
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
+
+
+const Items = ( { resp } ) => {
+
+    const classes = useStyles();
+
+    return resp.map( (item) =>
+        
+        <Grid item xs={12} sm={3}>
+        <Paper className={classes.paper} elevation={3} >
            <Card>
             <CardActionArea>
                 <CardMedia
                 style={{ height: "150px"}}
-                image="assets/images/gallery/imagen_vacia.jpg"
-                title="Contemplative Reptile"
+                image={ item.pictureUrl }
+                title={ item.pictureUrl }
                 />
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Lorem ipsum
+                    { item.title }
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia 
@@ -37,7 +58,7 @@ const Items = () => {
             <CardActions>
                 <AttachMoneyIcon size="small" color="primary"/>
                     <Typography>
-                        1500
+                    { item.price }
                     </Typography>
                 <ItemCount />
                 <IconButton >
@@ -52,8 +73,9 @@ const Items = () => {
                 Buy
             </Button>
             </Card> 
-        </div>
-    );
+        </Paper>
+    </Grid>
+    )
 };
 
 export default Items;
