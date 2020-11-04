@@ -1,8 +1,25 @@
-import React, {useEffect }  from 'react';
+import React, {useEffect, useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { useParams } from 'react-router-dom';
 import { Paper, Grid, ButtonBase, Typography } from '@material-ui/core';
+
+
+
+
+//Promise resolve an objet with the items data
+const getItems = () => {
+    return new Promise((resp, rej) =>{
+        setTimeout( ()=> {
+            resp( [ 
+                { id: 1, title: "2x1 Loop class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: 2, title: "Rise the Bar", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: 3, title: "Level Up with Loop", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: 4, title: "contempo", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                ])
+           
+        }, 3000)
+    });
+}
 
 
 //styles
@@ -29,47 +46,52 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemDetailContainer = () => {
 
+    //styles
+    const classes = useStyles();
+
     //destructurar la funcion y sacar sus parametros para usarlos.
     //useParams escucha la URL y captura la ruta.
     const { id } = useParams();
+    const [itemId, setItemId] = useState([]);
+
+
     useEffect( () =>{
         console.log("recibi el id", id);
+        getItems( ).then(
+            resp => {
+                setItemId( resp[2] );
+                console.log("respuesta recibida", resp[2]);
+        });
         
     }, [id]);
 
-    //styles
-    const classes = useStyles();
-    
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
                     <ButtonBase className={classes.image}>
-                        <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+                        <img className={classes.img} alt={itemId.title} src={itemId.pictureUrl} />
                     </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                         <Typography gutterBottom variant="subtitle1">
-                            Standard license
+                              { itemId.title }
                         </Typography>
                         <Typography variant="body2" gutterBottom>
-                            Full resolution 1920x1080 • JPEG
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quam, nulla reprehenderit minus nobis incidunt! Consectetur quidem, harum minima ab corrupti a reiciendis, dolores magnam numquam cupiditate, rem autem possimus!
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                            ID: 1030114
-                        </Typography>
-                        </Grid>
-                        <Grid item>
-                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                            Remove
+                        Code: { itemId.id }
                         </Typography>
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Typography variant="subtitle1">$19.00</Typography>
+                        <Typography variant="subtitle1">
+                        ${ itemId.price }
+                        </Typography>
                     </Grid>
                     </Grid>
                 </Grid>
