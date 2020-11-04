@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
+import { Link, NavLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
