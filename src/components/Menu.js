@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
 import { Link, NavLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Cart from '../components/Cart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,7 +59,7 @@ const Menu = () => {
                             <Button color="inherit">contact us</Button>
                             <Button color="inherit">contact us</Button>
                             <IconButton>
-                                <ShoppingCartIcon className="mysiconos"/>
+                              <Cart/>
                             </IconButton>
                             <IconButton>
                                 <AccountCircle className="mysiconos"/>  

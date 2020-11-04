@@ -6,6 +6,7 @@ import Menu from './components/Menu';
 import  ListItems  from './components/ListItems';
 import { Container} from '@material-ui/core';
 import ItemDetailContainer from './components/ItemDetailContainer';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -19,8 +20,12 @@ function App() {
               <ListItems/>
           </Container>
         </Route>
-        <Route exact path="/item/:id">
-          <ItemDetailContainer></ItemDetailContainer>
+        {/*path="/item/:id"*/}
+        <Route exact  path="/detail/:id" >
+          <ItemDetailContainer/>
+        </Route>
+        <Route exact  path="/detail" >
+          <Cart exact  path="/cart"/>
         </Route>
 
       </Switch>
