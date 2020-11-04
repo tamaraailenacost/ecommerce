@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, 
         CardActionArea, 
@@ -36,24 +38,26 @@ const Items = ( { resp } ) => {
 
     return resp.map( (item) =>
         
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={3}> 
         <Paper className={classes.paper} elevation={3} >
            <Card>
             <CardActionArea>
-                <CardMedia
-                style={{ height: "150px"}}
-                image={ item.pictureUrl }
-                title={ item.pictureUrl }
-                />
-                <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    { item.title }
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia 
-                    asperiores exercitationem doloribus...
-                </Typography>
-                </CardContent>
+                <Link to={ `/detail/${item.id }`}  color="initial"  target="_blank" underline="none">
+                    <CardMedia
+                    style={{ height: "150px"}}
+                    image={ item.pictureUrl }
+                    title={ item.title }
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        { item.title }
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia 
+                        asperiores exercitationem doloribus...
+                    </Typography>
+                    </CardContent>
+                </Link>
             </CardActionArea>
             <CardActions>
                 <AttachMoneyIcon size="small" color="primary"/>
@@ -65,13 +69,15 @@ const Items = ( { resp } ) => {
                     <ShareIcon size="small" color="primary" />
                 </IconButton>
             </CardActions>
-            <Button
-                variant="contained"
-                size="large"
-                startIcon={<ShoppingBasketIcon />}
-            >
-                Buy
-            </Button>
+            <Link to="/cart">
+                <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<ShoppingBasketIcon />}
+                >
+                    Buy
+                </Button>
+            </Link>
             </Card> 
         </Paper>
     </Grid>
