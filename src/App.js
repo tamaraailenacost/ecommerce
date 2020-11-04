@@ -24,8 +24,8 @@ function App() {
         <Route exact  path="/detail/:id" >
           <ItemDetailContainer/>
         </Route>
-        <Route exact  path="/detail" >
-          <Cart exact  path="/cart"/>
+        <Route exact  path="/cart" >
+          <Cart/>
         </Route>
 
       </Switch>
