@@ -1,7 +1,10 @@
 import React, {useEffect, useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import { Paper, Grid, ButtonBase, Typography } from '@material-ui/core';
+import { Paper, Grid, ButtonBase, Typography, Link, Button } from '@material-ui/core';
+import ItemCount from '../components/ItemCount';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
 
 
 
@@ -11,10 +14,10 @@ const getItems = () => {
     return new Promise((resp, rej) =>{
         setTimeout( ()=> {
             resp( [ 
-                { id: 1, title: "2x1 Loop class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: 2, title: "Rise the Bar", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: 3, title: "Level Up with Loop", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: 4, title: "contempo", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "1", title: "2x1 Loop class", stock:3, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "2", title: "Rise the Bar",stock:4, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "3", title: "Level Up with Loop",stock:2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "4", title: "contempo", price: 1500,stock:3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
                 ])
            
         }, 3000)
@@ -56,14 +59,27 @@ const ItemDetailContainer = () => {
 
 
     useEffect( () =>{
-        console.log("recibi el id", id);
-        getItems( ).then(
+        //console.log("recibi el id", id);
+        getItems( id ).then(
             resp => {
-                setItemId( resp[2] );
-                console.log("respuesta recibida", resp[2]);
+                 resp.filter(
+                    p =>{
+                        //console.log("respuesta recibida", p);
+                        if( p.id === id ) {
+                            //console.log("respuesta recibida", p);
+                            setItemId(p);
+                        }
+                    }
+
+                  );
         });
         
     }, [id]);
+
+    function addtoCart( event ) {
+    console.log("click");
+    }
+
 
     return (
         <div className={classes.root}>
@@ -95,6 +111,18 @@ const ItemDetailContainer = () => {
                     </Grid>
                     </Grid>
                 </Grid>
+            <Grid>
+                <ItemCount onClick={addtoCart} maxQuantity={itemId.stock}/>
+            </Grid>
+            <Link to="/cart">
+                <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<ShoppingBasketIcon />}
+                >
+                    Buy
+                </Button>
+            </Link>
             </Paper>
       </div>
     );
