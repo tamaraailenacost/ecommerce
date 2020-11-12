@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Paper, Grid, ButtonBase, Typography, Link, Button } from '@material-ui/core';
 import ItemCount from '../components/ItemCount';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import Loading from '../components/Loading';
 
 
 
@@ -56,6 +57,8 @@ const ItemDetailContainer = () => {
     //useParams escucha la URL y captura la ruta.
     const { id } = useParams();
     const [itemId, setItemId] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+
 
 
     useEffect( () =>{
@@ -68,6 +71,7 @@ const ItemDetailContainer = () => {
                         if( p.id === id ) {
                             //console.log("respuesta recibida", p);
                             setItemId(p);
+                            setLoading(true);
                         }
                     }
 
@@ -83,7 +87,8 @@ const ItemDetailContainer = () => {
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.paper}>
+            { !loading && <Loading/> }
+            { loading && <Paper className={classes.paper} style={{ marginTop: "4em" }}>
                 <Grid container spacing={2}>
                     <Grid item>
                     <ButtonBase className={classes.image}>
@@ -124,6 +129,7 @@ const ItemDetailContainer = () => {
                 </Button>
             </Link>
             </Paper>
+}
       </div>
     );
 };

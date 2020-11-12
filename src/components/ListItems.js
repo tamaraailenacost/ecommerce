@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, CircularProgress } from '@material-ui/core';
 import Items from '../components/Items';
+import Loading from '../components/Loading';
 
 
 
@@ -24,21 +25,26 @@ const getItems = () => {
 const ListItems = () => {
 
     const [list, setList] = useState([]);
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
         getItems( ).then(
             resp => {
                 setList( resp );
+                setLoading( true );
         });
     
     }, []);
     
     return (
-        <div>
-             <Grid container item spacing={4} style={{ marginTop: "2em" }}>                
+        <>
+             <Grid container item spacing={4} style={{ marginTop: "2em" }}> 
+    { !loading && <Loading/> }
+             
                 <Items resp = { list }/>
-            </Grid>    
-        </div>
+            
+            </Grid> 
+        </>
     );
 };
 
