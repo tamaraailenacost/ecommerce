@@ -64,20 +64,13 @@ const Items = ( { resp } ) => {
                     <Typography>
                     { item.price }
                     </Typography>
-                <ItemCount />
+                    <Grid>
+                    <ItemCount />
+                    </Grid>
                 <IconButton >
                     <ShareIcon size="small" color="primary" />
                 </IconButton>
             </CardActions>
-            <Link to="/cart">
-                <Button
-                    variant="contained"
-                    size="large"
-                    startIcon={<ShoppingBasketIcon />}
-                >
-                    Buy
-                </Button>
-            </Link>
             </Card> 
         </Paper>
     </Grid>

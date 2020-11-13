@@ -1,9 +1,9 @@
+
 import React, { useState } from 'react';
-import  { IconButton } from '@material-ui/core';
+import  { IconButton, Link, Button, Grid } from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import RemoveIcon from '@material-ui/icons/Remove';
-
-
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 const ItemCount = () => {
@@ -30,6 +30,17 @@ const ItemCount = () => {
                     <AddShoppingCartIcon size="small"/>
                    
             </IconButton>
+            <Grid>
+            <Link to="/cart">
+                <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<ShoppingBasketIcon />}
+                >
+                    Add to Cart { add } 
+                </Button>
+            </Link>
+            </Grid>
         </>
     );
 };

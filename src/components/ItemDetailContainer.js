@@ -119,15 +119,6 @@ const ItemDetailContainer = () => {
             <Grid>
                 <ItemCount onClick={addtoCart} maxQuantity={itemId.stock}/>
             </Grid>
-            <Link to="/cart">
-                <Button
-                    variant="contained"
-                    size="large"
-                    startIcon={<ShoppingBasketIcon />}
-                >
-                    Buy
-                </Button>
-            </Link>
             </Paper>
 }
       </div>
