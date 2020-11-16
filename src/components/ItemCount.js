@@ -5,12 +5,15 @@ import {Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { useCartContext } from '../context/cartContext';
 
 
-const ItemCount = () => {
+const ItemCount = ( props ) => {
 
     const [ add, setAdd ] = useState(1);
     const [show, setShow] = useState(false);
+    const { cart, addItem } = useCartContext();
+    const { item } = props;
 
 
     function addClick(){
@@ -23,10 +26,11 @@ const ItemCount = () => {
         }
     }
 
-    const addToCart = () => {
+    const addToCart = (  add, itemId ) => {
         
         setShow( true);
-        console.log("el estado esta " ,show);
+        addItem(item);
+     
     }
     
     return (
@@ -41,7 +45,7 @@ const ItemCount = () => {
                     
                 </IconButton>
                 <Button
-                    onClick={ addToCart }
+                    onClick={ ()=> addToCart(add, item) }
                     variant="contained"
                     size="large"
                     startIcon={<ShoppingBasketIcon />}
