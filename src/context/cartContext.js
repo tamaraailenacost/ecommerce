@@ -15,7 +15,7 @@ export default function CartProvider({ children, defaultCart = [] }) {
     function addItem ( item ) { 
 
         //const existItem = cart.find( element => element.title === item.title );
-        console.log("agregar al carrito", existItem);
+        //console.log("agregar al carrito", existItem);
 
         setCart([...cart, item]);
 
