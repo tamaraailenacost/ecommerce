@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Button, Badge  } from '@material-ui/core';
 import { Link, NavLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import Cart from '../components/Cart';
+import { useCartContext } from '../context/cartContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 const Menu = () => {
 
     const classes = useStyles();
+    
+    const { cart } = useCartContext();
+  
 
     return (
         <div>
@@ -59,7 +63,11 @@ const Menu = () => {
                             <Button color="inherit">contact us</Button>
                             <Button color="inherit">contact us</Button>
                             <IconButton>
-                              <Cart/>
+                            <Link to="/cart">
+                            <Badge badgeContent={ cart.length } color="secondary">
+                            <ShoppingCartIcon  className="mysiconos"/>
+                            </Badge>
+                            </Link>
                             </IconButton>
                             <IconButton>
                                 <AccountCircle className="mysiconos"/>  

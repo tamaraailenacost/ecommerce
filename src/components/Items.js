@@ -65,7 +65,7 @@ const Items = ( { resp } ) => {
                     { item.price }
                     </Typography>
                     <Grid>
-                    <ItemCount />
+                    <ItemCount  item = {item} />
                     </Grid>
                 <IconButton >
                     <ShareIcon size="small" color="primary" />
