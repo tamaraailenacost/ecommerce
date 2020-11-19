@@ -7,35 +7,54 @@ export const useCartContext = () => useContext(CartContext);
 //import React , { useContext } from 'react';
 
 
-export default function CartProvider({ children, defaultCart = [] }) {
+export default function CartProvider({ children}) {
 
-    const [cart, setCart] = useState(defaultCart);
+    const [cart, setCart] = useState( []);
+    const [cartQty, setcarQty ] = useState(0);
 
 
-    function addItem ( item ) { 
+    function addItem ( item, qty ) { 
+ 
+            if (!cart.find( p => p.id === item.id )) {
 
-        //const existItem = cart.find( element => element.title === item.title );
-        //console.log("agregar al carrito", existItem);
+                setCart([...cart, item]); 
+                setcarQty( cartQty + item.stock ); 
+                 
+            }
+            else {
+                //udate cantidad 
+                cart.map(function( i ) {    
 
-        setCart([...cart, item]);
-
+                    if( i.id === item.id){
+                        i.stock = qty;
+                    }
+                    return i;
+                 });
+                 console.log(cart);
+                 setCart([...cart]);
+                 setcarQty( cartQty + item.stock ); 
+            }
     }
 
-    function removeItem ( itemId ){
+    function removeItem ( item ){
 
-        console.log("remover al carrito", itemId);
+        //console.log("remover item", itemId);
+        const newCart = cart.filter( i => i.id !== item.id );
+        setCart([...newCart]);
+        setcarQty( cartQty - item.stock ); 
 
     }
 
     function clearItems() {
 
-        setCart( defaultCart = []);
+        setCart([]);
+        setcarQty(0);
         console.log("el carrito quedo vacio" , cart);
     }
 
 
 
-    return <CartContext.Provider value = { { cart, addItem, removeItem, clearItems } } > 
+    return <CartContext.Provider value = { {cart, addItem, removeItem, clearItems, cartQty } } > 
                 { children }
             </CartContext.Provider>
 }

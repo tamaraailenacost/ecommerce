@@ -26,10 +26,11 @@ const ItemCount = ( props ) => {
         }
     }
 
-    const addToCart = (  add, itemId ) => {
+    const addToCart = (  qty, item  ) => {
         
         setShow( true);
-        addItem(item);
+        item.stock = qty;
+        addItem(item, qty);
      
     }
     
