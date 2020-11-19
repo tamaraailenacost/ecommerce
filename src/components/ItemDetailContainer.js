@@ -1,7 +1,7 @@
 import React, {useEffect, useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import { Paper, Grid, ButtonBase, Typography, Link, Button } from '@material-ui/core';
+import { Paper, Grid, ButtonBase, Typography, Button } from '@material-ui/core';
 import ItemCount from '../components/ItemCount';
 import Loading from '../components/Loading';
 import { getFirestore } from '../firebase';
