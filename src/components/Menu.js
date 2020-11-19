@@ -42,7 +42,8 @@ const Menu = () => {
 
     const classes = useStyles();
     
-    const { cart } = useCartContext();
+    const { cart, cartQty } = useCartContext();
+    console.log( cartQty);
   
 
     return (
@@ -64,7 +65,7 @@ const Menu = () => {
                             <Button color="inherit">contact us</Button>
                             <IconButton>
                             <Link to="/cart">
-                            <Badge badgeContent={ cart.length } color="secondary">
+                            <Badge badgeContent={ cartQty } color="secondary">
                             <ShoppingCartIcon  className="mysiconos"/>
                             </Badge>
                             </Link>

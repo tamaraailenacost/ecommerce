@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Paper, Grid, ButtonBase, Typography, Link, Button } from '@material-ui/core';
 import ItemCount from '../components/ItemCount';
 import Loading from '../components/Loading';
+import { getFirestore } from '../firebase';
 
 
 
@@ -78,7 +79,25 @@ const ItemDetailContainer = () => {
                   );
         });
         
-    }, [id]);
+    }, [id]); 
+
+    /*useEffect(() => {
+        setLoading(true);
+        const db = getFirestore();
+        const itemCollection = db.collection("items");
+        const catCollection = itemCollection
+        .where('categoryId', '==', 'gorros');
+        catCollection.get().then((querySnapshot) => {
+            if(querySnapshot.size === 0) {
+              console.log('No results');
+            };
+            setItemId(
+              querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+            );
+            setLoading(false);
+        });
+      }, [ id ]);*/
+    
 
     
 

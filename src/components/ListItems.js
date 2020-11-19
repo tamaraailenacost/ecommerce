@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Paper, CircularProgress } from '@material-ui/core';
 import Items from '../components/Items';
 import Loading from '../components/Loading';
+import { getFirestore } from '../firebase';
 
 
 
@@ -10,10 +11,10 @@ const getItems = () => {
     return new Promise((resp, rej) =>{
         setTimeout( ()=> {
             resp( [ 
-                { id: 1, title: "2x1 Loop class", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
-                { id: 2, title: "Rise the Bar", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
-                { id: 3, title: "Level Up with Loop", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
-                { id: 4, title: "contempo", price: 1500, pictureUrl: "assets/images/gallery/imagen_vacia.jpg" },
+                { id: "1", title: "2x1 Loop class", stock:3, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "2", title: "Rise the Bar",stock:4, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "3", title: "Level Up with Loop",stock:2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "4", title: "contempo", price: 1500,stock:3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
                 ])
            
         }, 2000)
@@ -30,6 +31,7 @@ const ListItems = () => {
     useEffect(() => {
         getItems( ).then(
             resp => {
+                
                 setList( resp );
                 setLoading( true );
         });
