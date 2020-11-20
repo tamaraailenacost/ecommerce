@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {Table, TableBody, TableCell, TableContainer} from '@material-ui/core';
 import {TableHead, TableRow, Paper, Button } from '@material-ui/core';
-import {Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
-import { Typography} from '@material-ui/core';
+//import { Alert, AlertTitle } from '@material-ui/lab';
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
+
+
+// components
+import Resume from '../components/Resume';
+import ItemAction from '../components/ItemAction';
 
 //icons
-import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import RemoveIcon from '@material-ui/icons/Remove';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 //Firabase
@@ -36,11 +41,8 @@ const Cart = () => {
     const classes = useStyles();
 
     const { cart, removeItem, clearItems } = useCartContext();
-    
-    const acum = cart.map( (i ) => {        
-        return i.price * i.stock;
-    });
-    const sum =acum.reduce( (acum, index) => acum + index );
+  
+
 
 
     function createOrder() {
@@ -66,27 +68,17 @@ const Cart = () => {
     
     return (
     <>
-      <Button variant="contained" color="secondary" onClick={ createOrder } style={{ marginTop: "2em" }} >
-              <DeleteIcon/>
-              Create
-            </Button>
-            <Button variant="contained" color="secondary" onClick={ clearItems } style={{ marginTop: "2em" }} >
-        <DeleteIcon/>
-           Delete all 
-      </Button>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}> Total compra:  {sum}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ab aliquid temporibus quisquam, consequatur maxime itaque quam. Eum, asperiores dolor at doloremque cum molestias architecto suscipit cupiditate doloribus quam tempore.
-        </AccordionDetails>
-      </Accordion>
-      <TableContainer component={Paper} style={{ marginTop: "2em" }}>
+      { cart.length > 0 && <Resume/> }
+
+      { !cart.length > 0 && <Alert severity="info">
+        <AlertTitle>Info</AlertTitle>
+        Your cart is empty <strong>check it out!</strong>
+        <hr/>
+        <Link to="/">Go back to Home</Link>
+      </Alert>
+      }
+
+      { cart.length >0 && <TableContainer component={Paper} style={{ marginTop: "2em" }}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -102,18 +94,15 @@ const Cart = () => {
               <TableCell component="th" scope="row"> {item.title} - ${item.price} u. </TableCell>
               <TableCell align="right">$ {item.price * item.stock}</TableCell>
               <TableCell align="right">
-              <Button variant="contained" color="action" fontSize="small"  style={{ marginTop: "2em", marginRight:"2em"  }} >
-                    <AddIcon/>
-                </Button>
 
-                {item.stock}
-
-                <Button variant="contained" color="inherit" fontSize="small" style={{ marginTop: "2em", marginLeft:"2em" }} >
-                    <RemoveIcon/>
-                </Button>
+                <ItemAction stock={ item.stock }/>
                 </TableCell>
               <TableCell align="right">
-                <Button variant="contained" color="secondary" onClick={ () => removeItem(item) } style={{ marginTop: "2em" }} >
+                <Button variant="contained" 
+                color="secondary" 
+                onClick={ () => removeItem(item) } 
+                style={{ marginTop: "2em" }} 
+                 >
                     <DeleteIcon/>
                 </Button>
               </TableCell>
@@ -122,7 +111,7 @@ const Cart = () => {
         </TableBody>
       </Table>
     </TableContainer>
-    <br/>
+    }
   </>
   );
         
