@@ -13,20 +13,22 @@ export default function CartProvider({ children}) {
     const [cartQty, setcarQty ] = useState(0);
 
 
+
+
     function addItem ( item, qty ) { 
  
             if (!cart.find( p => p.id === item.id )) {
-
+                
+                
                 setCart([...cart, item]); 
-                setcarQty( cartQty + item.stock ); 
-                 
+                setcarQty( cartQty + item.stock );     
             }
             else {
                 //udate cantidad 
                 cart.map(function( i ) {    
 
                     if( i.id === item.id){
-                        i.stock = qty;
+                        i.stock += qty;
                     }
                     return i;
                  });
@@ -36,15 +38,21 @@ export default function CartProvider({ children}) {
             }
     }
 
+
+
+
     function removeItem ( item ){
 
         //console.log("remover item", itemId);
         const newCart = cart.filter( i => i.id !== item.id );
+
         setCart([...newCart]);
         setcarQty( cartQty - item.stock ); 
-
     }
 
+    
+    
+    
     function clearItems() {
 
         setCart([]);

@@ -53,14 +53,19 @@ const Menu = () => {
                         <IconButton className={classes.menuButton} color="inherit">
                             <MenuIcon/>
                         </IconButton>
+                        
                         <Typography variant="h6" className={classes.title}>
-                        FITNESS
+                          <Link to="/">
+                          FITNESS
+                          </Link>
                         </Typography>
                         <SearchIcon />
                             <InputBase classes={{root: classes.inputRoot,input: classes.inputInput}} 
                             placeholder="Search product"/>
                         <div className="menuI">
-                            <Button color="inherit">Products</Button>
+                          <Link to="/">
+                          <Button color="inherit">Products</Button>
+                          </Link>
                             <Button color="inherit">contact us</Button>
                             <Button color="inherit">contact us</Button>
                             <IconButton>

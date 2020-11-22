@@ -51,7 +51,7 @@ const ItemCount = ( props ) => {
                     size="large"
                     startIcon={<ShoppingBasketIcon />}
                 >
-                    Add { add } 
+                     { add } 
                 </Button>
             </Grid>
             { show &&<Link to="/cart">

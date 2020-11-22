@@ -42,7 +42,7 @@ const Items = ( { resp } ) => {
         <Paper className={classes.paper} elevation={3} >
            <Card>
             <CardActionArea>
-                <Link to={ `/detail/${item.id }`}  color="initial"  target="_blank" underline="none">
+                <Link to={ `/detail/${item.id }`}  color="initial"   underline="none">
                     <CardMedia
                     style={{ height: "150px"}}
                     image={ item.pictureUrl }
