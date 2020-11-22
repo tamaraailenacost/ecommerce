@@ -18,23 +18,29 @@ export default function CartProvider({ children}) {
     function addItem ( item, qty ) { 
  
             if (!cart.find( p => p.id === item.id )) {
+                console.log("entre por error");
                 
                 
                 setCart([...cart, item]); 
                 setcarQty( cartQty + item.stock );     
             }
             else {
-                //udate cantidad 
+                //update qty 
+                console.log("qty item", qty);
                 cart.map(function( i ) {    
 
                     if( i.id === item.id){
-                        i.stock += qty;
+                        i.stock = qty;
                     }
                     return i;
                  });
-                 console.log(cart);
                  setCart([...cart]);
-                 setcarQty( cartQty + item.stock ); 
+
+                 const total = cart.reduce( ( acum, index ) => {
+                    return acum += index.stock; 
+                  }, 0);
+
+                 setcarQty( total ); 
             }
     }
 

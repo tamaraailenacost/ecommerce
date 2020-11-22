@@ -16,29 +16,30 @@ const ItemAction = ( props ) => {
     //debugger;
 
     const { cart, addItem } = useCartContext();
-    const { stock } = props;
+    const { stock, item } = props;
     const [ add, setAdd ] = useState( stock );
 
 
     function addClick(){
-        setAdd( stock + 1 );
-        console.log(add);
+        
+        if( add <  item.maxQty ){ 
+            let qty = add +1;
+            setAdd( add + 1 );
+            addItem( item, qty);
+        }
+        
+        
     }
 
     function substractClick(){
+
         if(add > 1 ){
-            setAdd( stock -1);
-            console.log(add);
+            let qty = add -1;
+            setAdd( add -1);
+            addItem( item, qty);
+            
         }
     }
-
-    /*const addToCart = (  qty, item  ) => {
-        
-        setShow( true);
-        item.stock = qty;
-        addItem(item, qty);
-     
-    }*/
 
     return (
         <>

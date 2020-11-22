@@ -124,7 +124,7 @@ const Cart = () => {
               <TableCell align="right">$ {item.price * item.stock}</TableCell>
               <TableCell align="right">
 
-                <ItemAction stock={ item.stock }/>
+                <ItemAction stock={ item.stock } item={ item }/>
                 </TableCell>
               <TableCell align="right">
                 <Button variant="contained" 

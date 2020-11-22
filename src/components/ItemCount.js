@@ -10,14 +10,18 @@ import { useCartContext } from '../context/cartContext';
 
 const ItemCount = ( props ) => {
 
-    const [ add, setAdd ] = useState(1);
-    const [show, setShow] = useState(false);
     const { cart, addItem } = useCartContext();
     const { item } = props;
+    const [ add, setAdd ] = useState( 1 );
+    const [show, setShow] = useState(false);
+   
 
 
     function addClick(){
-        setAdd(add + 1 );
+        if( add <  item.maxQty ){
+            setAdd(add + 1 );
+        }
+        
     }
 
     function substractClick(){

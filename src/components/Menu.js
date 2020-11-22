@@ -53,7 +53,7 @@ const Menu = () => {
                         <IconButton className={classes.menuButton} color="inherit">
                             <MenuIcon/>
                         </IconButton>
-                        
+    
                         <Typography variant="h6" className={classes.title}>
                           <Link to="/">
                           FITNESS
