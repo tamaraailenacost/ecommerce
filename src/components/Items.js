@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, 
+import { Card,
+        Chip, 
         CardActionArea, 
         CardMedia, 
         Typography, 
@@ -52,10 +53,8 @@ const Items = ( { resp } ) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         { item.title }
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia 
-                        asperiores exercitationem doloribus...
-                    </Typography>
+                    <Chip label={ item.category }   color="secondary"/>
+                   
                     </CardContent>
                 </Link>
             </CardActionArea>

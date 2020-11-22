@@ -1,7 +1,7 @@
 import React, {useEffect, useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import { Paper, Grid, ButtonBase, Typography, Button } from '@material-ui/core';
+import { Paper, Grid, ButtonBase, Typography, Button, Chip } from '@material-ui/core';
 import ItemCount from '../components/ItemCount';
 import Loading from '../components/Loading';
 import { getFirestore } from '../firebase';
@@ -15,10 +15,10 @@ const getItems = () => {
     return new Promise((resp, rej) =>{
         setTimeout( ()=> {
             resp( [ 
-                { id: "1", title: "2x1 Loop class", stock:3, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "2", title: "Rise the Bar",stock:4, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "3", title: "Level Up with Loop",stock:2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "4", title: "contempo", price: 1500,stock:3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "1", title: "2x1 Loop class", stock:3,category:"class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "2", title: "Rise the Bar",stock:4, category:"class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "3", title: "Level Up with Loop", category:"class",stock:2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
+                { id: "4", title: "contempo", price: 1500, category:"class", stock:3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
                 ])
            
         }, 3000)
@@ -124,12 +124,14 @@ const ItemDetailContainer = () => {
                         <Typography variant="body2" color="textSecondary">
                         Code: { itemId.id }
                         </Typography>
+                        <Chip label={ itemId.category }   color="secondary"/>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <Typography variant="subtitle1">
                         ${ itemId.price }
                         </Typography>
+                        
                     </Grid>
                     </Grid>
                 </Grid>
