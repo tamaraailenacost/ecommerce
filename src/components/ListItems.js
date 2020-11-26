@@ -2,24 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Paper, CircularProgress } from '@material-ui/core';
 import Items from '../components/Items';
 import Loading from '../components/Loading';
+
+// Firebase
 import { getFirestore } from '../firebase';
-
-
-
-//Promise resolve an objet with the items data
-const getItems = () => {
-    return new Promise((resp, rej) =>{
-        setTimeout( ()=> {
-            resp( [ 
-                { id: "1", maxQty:"10", title: "2x1 Loop class", stock:3, category:"class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "2", maxQty:"10", title: "Rise the Bar",stock:4, category:"class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "3", maxQty:"10", title: "Level Up with Loop", category:"class", stock:2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                { id: "4", maxQty:"10", title: "contempo", price: 1500, category:"class", stock:3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-                ])
-           
-        }, 2000)
-    });
-}
 
 
 
@@ -28,15 +13,26 @@ const ListItems = () => {
     const [list, setList] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
+
     useEffect(() => {
-        getItems( ).then(
-            resp => {
-                
-                setList( resp );
-                setLoading( true );
+        //setLoading(true);
+        const db = getFirestore();
+        const itemCollection = db.collection("items");
+        console.log( itemCollection );
+        //const catCollection = itemCollection
+        //.where('categoryId', '==', 'gorros');
+        itemCollection.get().then((querySnapshot) => {
+            if(querySnapshot.size === 0) {
+              console.log('No results');
+            };
+            setList(
+              querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+            );
+            setLoading(true);
         });
-    
-    }, []);
+      },[  ]);
+
+
     
     return (
         <>

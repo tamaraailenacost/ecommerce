@@ -55,13 +55,14 @@ const ItemDetailContainer = () => {
 
     //destructurar la funcion y sacar sus parametros para usarlos.
     //useParams escucha la URL y captura la ruta.
-    const { id } = useParams();
+    const { ID } = useParams();
     const [itemId, setItemId] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
 
 
-
+/*
+    
     useEffect( () =>{
         //console.log("recibi el id", id);
         getItems( id ).then(
@@ -79,24 +80,25 @@ const ItemDetailContainer = () => {
                   );
         });
         
-    }, [id]); 
+    }, [id]); */
 
-    /*useEffect(() => {
-        setLoading(true);
+    useEffect(() => {
+
         const db = getFirestore();
         const itemCollection = db.collection("items");
         const catCollection = itemCollection
-        .where('categoryId', '==', 'gorros');
+        .where('id', '==', ID);
         catCollection.get().then((querySnapshot) => {
             if(querySnapshot.size === 0) {
               console.log('No results');
             };
+            console.log( querySnapshot);
             setItemId(
               querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
             );
-            setLoading(false);
+            setLoading(true);
         });
-      }, [ id ]);*/
+      }, [ ID ]);
     
 
     
@@ -119,7 +121,7 @@ const ItemDetailContainer = () => {
                               { itemId.title }
                         </Typography>
                         <Typography variant="body2" gutterBottom>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quam, nulla reprehenderit minus nobis incidunt! Consectetur quidem, harum minima ab corrupti a reiciendis, dolores magnam numquam cupiditate, rem autem possimus!
+                          { itemId.feature}
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
                         Code: { itemId.id }
