@@ -55,7 +55,7 @@ const ItemDetailContainer = () => {
 
     //destructurar la funcion y sacar sus parametros para usarlos.
     //useParams escucha la URL y captura la ruta.
-    const { ID } = useParams();
+    const { id } = useParams();
     const [itemId, setItemId] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
@@ -84,21 +84,24 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
 
+        
         const db = getFirestore();
         const itemCollection = db.collection("items");
+
+        console.log( "itemCollection", itemCollection);
         const catCollection = itemCollection
-        .where('id', '==', ID);
+        .where('id', '==', id);
         catCollection.get().then((querySnapshot) => {
             if(querySnapshot.size === 0) {
               console.log('No results');
             };
-            console.log( querySnapshot);
+            console.log( querySnapshot.docs );
             setItemId(
               querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
             );
             setLoading(true);
         });
-      }, [ ID ]);
+      }, [ id ]);
     
 
     
