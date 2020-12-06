@@ -2,19 +2,25 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
-import Menu from './components/Menu';
+import Menu1 from './components/Menu1';
 import  ListItems  from './components/ListItems';
 import { Container} from '@material-ui/core';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from './components/Cart';
 import CartProvider from './context/cartContext';
+import Category from './components/Category';
+
+
+
 
 function App() {
+
+  
   return (
     <>
       <CartProvider>
         <BrowserRouter>
-          <Menu/>
+          <Menu1/>
 
           <Switch>
             <Route exact path = "/">
@@ -25,6 +31,9 @@ function App() {
             {/*path="/item/:id"*/}
             <Route exact  path="/detail/:id" >
               <ItemDetailContainer/>
+            </Route>
+            <Route exact  path="/categories/:categoryId" >
+              <Category/>
             </Route>
             <Route exact  path="/cart" >
               <Cart/>

@@ -57,9 +57,10 @@ const ItemCount = ( props ) => {
                 >
                      { add } 
                 </Button>
+                <p> Stock Available: { item.maxQty }</p>
             </Grid>
             { show &&<Link to="/cart">
-                <Button>
+                <Button  >
                     Buy now!
                 </Button>
             </Link>}

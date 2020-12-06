@@ -53,22 +53,18 @@ const Items = ( { resp } ) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         { item.title }
                     </Typography>
-                    <Chip label={ item.category }   color="secondary"/>
-                   
+                    <Typography>
+                     $ { item.price } 
+                     </Typography>
+                    <Chip label={ item.category }   color="secondary" />
+                    <hr/>
                     </CardContent>
                 </Link>
             </CardActionArea>
             <CardActions>
-                <AttachMoneyIcon size="small" color="primary"/>
-                    <Typography>
-                    { item.price }
-                    </Typography>
                     <Grid>
                     <ItemCount  item = {item} />
                     </Grid>
-                <IconButton >
-                    <ShareIcon size="small" color="primary" />
-                </IconButton>
             </CardActions>
             </Card> 
         </Paper>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Button, Badge  } from '@material-ui/core';
 import { Link, NavLink } from 'react-router-dom';
+import { MenuItem, Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -38,7 +39,17 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const Menu = () => {
+const Menu1 = () => {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const classes = useStyles();
     
@@ -64,7 +75,26 @@ const Menu = () => {
                             placeholder="Search product"/>
                         <div className="menuI">
                           <Link to="/">
-                          <Button color="inherit">Products</Button>
+                          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                          Products
+                          </Button>
+                          <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <Link to="/categories/Loop">
+                              <MenuItem onClick={handleClose} >Loop</MenuItem>
+                            </Link>
+                            <Link to="/categories/Silk">
+                              <MenuItem onClick={handleClose} >Silk</MenuItem>
+                            </Link>
+                            <Link to="/categories/Dance">
+                              <MenuItem onClick={handleClose} >Dance</MenuItem>
+                            </Link>
+                          </Menu>
                           </Link>
                             <Button color="inherit">contact us</Button>
                             <Button color="inherit">contact us</Button>
@@ -85,5 +115,5 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default Menu1;
 

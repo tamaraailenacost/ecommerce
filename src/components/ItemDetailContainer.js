@@ -4,26 +4,15 @@ import { useParams } from 'react-router-dom';
 import { Paper, Grid, ButtonBase, Typography, Button, Chip } from '@material-ui/core';
 import ItemCount from '../components/ItemCount';
 import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+
+//Alert
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
+
+//Firebase
 import { getFirestore } from '../firebase';
 
-
-
-
-
-//Promise resolve an objet with the items data
-const getItems = () => {
-    return new Promise((resp, rej) =>{
-        setTimeout( ()=> {
-            resp( [
-              { id: "1", maxQty: "10", title: "2x1 Loop class", stock: 3, category: "class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-              { id: "2", maxQty: "10", title: "Rise the Bar", stock: 4, category: "class", price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-              { id: "3", maxQty: "10", title: "Level Up with Loop", category: "class", stock: 2, price: 1500, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-              { id: "4", maxQty: "10", title: "contempo", price: 1500, category: "class", stock: 3, pictureUrl: "/assets/images/gallery/imagen_vacia.jpg" },
-          ])
-           
-        }, 3000)
-    });
-}
 
 
 //styles
@@ -57,50 +46,34 @@ const ItemDetailContainer = () => {
     //useParams escucha la URL y captura la ruta.
     const { id } = useParams();
     const [itemId, setItemId] = useState([]);
+    const [error, setError ] = useState( false);
     const [ loading, setLoading ] = useState(false);
 
-
-
-/*
-    
-    useEffect( () =>{
-        //console.log("recibi el id", id);
-        getItems( id ).then(
-            resp => {
-                 resp.filter(
-                    p =>{
-                        //console.log("respuesta recibida", p);
-                        if( p.id === id ) {
-                            //console.log("respuesta recibida", p);
-                            setItemId(p);
-                            setLoading(true);
-                        }
-                    }
-
-                  );
-        });
-        
-    }, [id]); */
 
     useEffect(() => {
 
         
         const db = getFirestore();
         const itemCollection = db.collection("items");
+        const item = itemCollection.doc(id);
+        
+        //console.log("el item que trajo", item);
 
-        console.log( "itemCollection", itemCollection);
-        const catCollection = itemCollection
-        .where('id', '==', id);
-        catCollection.get().then((querySnapshot) => {
-            if(querySnapshot.size === 0) {
-              console.log('No results');
-            };
-            console.log( querySnapshot.docs );
-            setItemId(
-              querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-            );
-            setLoading(true);
+        item.get().then(( doc ) =>{
+          if( !doc.exists){
+            console.log("item not exist");
+            setError(true);
+            return;
+          }
+          setItemId( { id: doc.id, ...doc.data() } );
+          
+        }).catch( (err) => {
+          setError(true);
+
+        }).finally( () => {
+          setLoading(true);
         });
+
       }, [ id ]);
     
 
@@ -110,7 +83,15 @@ const ItemDetailContainer = () => {
     return (
         <div className={classes.root}>
             { !loading && <Loading/> }
-            { loading && <Paper className={classes.paper} style={{ marginTop: "4em" }}>
+            { error  && <Alert severity="info">
+                  <AlertTitle>Info</AlertTitle>
+                  There is a problem <strong> with the internet conexion  </strong>
+                  or the item you are looking for doesn't exist.
+                  <hr/>
+                  <Link to="/">Go back to Home</Link>
+                </Alert>
+            }
+            { loading && !error && <Paper className={classes.paper} style={{ marginTop: "4em" }}>
                 <Grid container spacing={2}>
                     <Grid item>
                     <ButtonBase className={classes.image}>
@@ -125,9 +106,6 @@ const ItemDetailContainer = () => {
                         </Typography>
                         <Typography variant="body2" gutterBottom>
                           { itemId.feature}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                        Code: { itemId.id }
                         </Typography>
                         <Chip label={ itemId.category }   color="secondary"/>
                         </Grid>
@@ -144,6 +122,7 @@ const ItemDetailContainer = () => {
                 <ItemCount item = {itemId}/>
             </Grid>
             </Paper>
+            
 }
       </div>
     );
