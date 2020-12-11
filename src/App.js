@@ -9,6 +9,7 @@ import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from './components/Cart';
 import CartProvider from './context/cartContext';
 import Category from './components/Category';
+import AuthProvider from './context/Auth';
 
 
 
@@ -18,6 +19,7 @@ function App() {
   
   return (
     <>
+      <AuthProvider>
       <CartProvider>
         <BrowserRouter>
           <Menu1/>
@@ -28,7 +30,6 @@ function App() {
                   <ListItems/>
               </Container>
             </Route>
-            {/*path="/item/:id"*/}
             <Route exact  path="/detail/:id" >
               <ItemDetailContainer/>
             </Route>
@@ -43,6 +44,7 @@ function App() {
 
         </BrowserRouter>
       </CartProvider>
+      </AuthProvider>
     </>
   );
 }

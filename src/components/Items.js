@@ -43,7 +43,7 @@ const Items = ( { resp } ) => {
         <Paper className={classes.paper} elevation={3} >
            <Card>
             <CardActionArea>
-                <Link to={ `/detail/${item.id }`}  color="initial"   underline="none">
+                
                     <CardMedia
                     style={{ height: "150px"}}
                     image={ item.pictureUrl }
@@ -57,9 +57,11 @@ const Items = ( { resp } ) => {
                      $ { item.price } 
                      </Typography>
                     <Chip label={ item.category }   color="secondary" />
-                    <hr/>
                     </CardContent>
-                </Link>
+                    <Link to={ `/detail/${item.id }`}  color="initial"   underline="none">
+                        Read More...
+                    </Link>
+                    <hr/>
             </CardActionArea>
             <CardActions>
                     <Grid>

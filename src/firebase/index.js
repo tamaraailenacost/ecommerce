@@ -1,5 +1,8 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+
+
+
 const app = firebase.initializeApp({
     apiKey: "AIzaSyDwGgEq6UcyFNoCvbo9iKgXxjxFKyIoLpE",
     authDomain: "ecommerce-react-6edde.firebaseapp.com",
@@ -13,6 +16,8 @@ const app = firebase.initializeApp({
 export function getFirebase() {
     return app;
 }
+
+
 export function getFirestore() {
     return firebase.firestore(app);
 }

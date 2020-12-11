@@ -16,12 +16,11 @@ import ItemAction from '../components/ItemAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-//Firabase
-import { getFirestore } from '../firebase';
-import * as firebase from 'firebase/app';
+
 
 //context
 import { useCartContext } from '../context/cartContext';
+import userEvent from '@testing-library/user-event';
 
 
 
@@ -41,58 +40,7 @@ const Cart = () => {
     const classes = useStyles();
 
     const { cart, removeItem, clearItems } = useCartContext();
-  
 
-
-
-    function createOrder() {
-      const newOrder = {
-          buyer: { name: 'Poli', phone: '+541143432323', email: 'asd@asd' },
-          items: [
-              { id: '1', title: 'zapas', price: 200, quantity: 2 },
-              { id: '2', title: 'gorro', price: 100, quantity: 1 },
-          ],
-          date: firebase.firestore.FieldValue.serverTimestamp(),
-          total: 500,
-      };
-
-      const db = getFirestore();
-
-      const orders = db.collection("orders");
-
-      orders.add(newOrder).then(id => {
-          console.log('Order created with id: ', id);
-      });
-  }
-  /*async function createOrder() {
-    debugger;
-    const newOrder = {
-        buyer: { name: 'Poli', phone: '+541143432323', email: 'asd@asd' },
-        items: [
-            { id: '1', title: 'zapas', price: 200, quantity: 2 },
-            { id: '2', title: 'gorro', price: 100, quantity: 1 },
-        ], // cart.map(c => ({}))
-        date: firebase.firestore.FieldValue.serverTimestamp(),
-        total: 500,
-    };
-    const db = getFirestore();
-    const orders = db.collection("orders");
-    try {
-        const doc = await orders.add(newOrder);
-        console.log('Order created with id: ', doc.id);
-        // Update stock
-        const itemQueryByManyId = await db.collection("items")
-        .where(firebase.firestore.FieldPath.documentId(), 
-        'in', cart.map(c => c.item.id) )
-        .get();
-        const [item] = itemQueryByManyId.docs;
-        await item.ref.update({ stock: item.data().stock - 1 });
-        // guadar el id en algun estado para mostrarselo
-        // al user
-    } catch (err) {
-        console.log('Error creating order');
-    }
-} */
 
     
     return (

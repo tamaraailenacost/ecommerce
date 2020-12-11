@@ -17,16 +17,13 @@ export default function CartProvider({ children}) {
 
     function addItem ( item, qty ) { 
  
-            if (!cart.find( p => p.id === item.id )) {
-                console.log("entre por error");
-                
+            if (!cart.find( p => p.id === item.id )) {                
                 
                 setCart([...cart, item]); 
                 setcarQty( cartQty + item.stock );     
             }
             else {
                 //update qty 
-                console.log("qty item", qty);
                 cart.map(function( i ) {    
 
                     if( i.id === item.id){
@@ -63,7 +60,6 @@ export default function CartProvider({ children}) {
 
         setCart([]);
         setcarQty(0);
-        console.log("el carrito quedo vacio" , cart);
     }
 
 
